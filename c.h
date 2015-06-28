@@ -2,17 +2,18 @@
 #define C_H
 
 #include <QWidget>
-
-class C : public QWidget
+#include<a.h>
+class C : public A
 {
     Q_OBJECT
 public:
-    explicit C(QWidget *parent = 0);
+    explicit C(QWidget *parent = 0, int Col=0, int Row=0);
     ~C();
 
 signals:
 
 public slots:
+    virtual void click();
 };
 
 #endif // C_H
