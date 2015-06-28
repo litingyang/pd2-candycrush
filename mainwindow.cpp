@@ -8,8 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     int a;
     turn=1;
-    Move=5;
+    Move=32;
     ui->label_4->setNum(Move);
+    ui->result->hide();
+    ui->pushButton_2->hide();
     star=0;
     score=0;
     //QTimer *timer2;
@@ -345,7 +347,7 @@ void MainWindow::Create(){
                 {a=qrand()%6;}
                 data[9*i+j]=a;
                 typ[9*i+j]=1;
-                b=qrand()%10;
+                b=qrand()%100;
                 if(b==0)
                     typ[9*i+j]=6;
 
@@ -855,6 +857,13 @@ void MainWindow::update_time(){
 void MainWindow::step(){
     Move=Move-1;
     ui->label_4->setNum(Move);
+    if(Move==0){
+        if(star>0)ui->result->setText("You win");
+        else ui->result->setText("You lose");
+        ui->result->show();
+
+
+    }
 
 
 
@@ -903,4 +912,70 @@ void MainWindow::on_pushButton_clicked()
 {
     emit quit(star,score);
     this->close();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    for(int i=0;i<9;++i){
+        for(int j=0;j<9;++j){
+        delete box[9*i+j];
+        }
+    }
+        delete timer2;
+        int a;
+        turn=1;
+        Move=5;
+        ui->label_4->setNum(Move);
+        star=0;
+        score=0;
+
+        //QTimer *timer2;
+        tm=0;
+        //QTimer::singleShot(1000, this, SLOT(update_time()));
+        timer2 = new QTimer(this);
+        connect(timer2, SIGNAL(timeout()), this, SLOT(update_time()));
+        timer2->start(1000);
+        timer.start();
+        QTextStream out(stdout);
+        out << QString("It took");
+        out << QString::number((timer.elapsed()/1000));
+        out << QString("milliseconds");
+        //timer = new QTimer(this);
+        //timer->start(1000);
+        QTime time = QTime::currentTime();
+        qsrand((uint)time.msec());
+        box.resize(81);
+        data.resize(81);
+        data2.resize(81);
+        typ.resize(81);
+        for(int i=0;i<9;++i){
+            for(int j=0;j<9;++j){
+                typ[9*i+j]=1;
+                a=qrand()%6;
+                //while(i>1)
+                while(i>1&&data[9*(i-1)+j]==a&&data[9*(i-2)+j]==a)
+                {a=qrand()%6;}
+                //while(j>1)
+                while(j>1&&data[9*i+j-1]==a&&data[9*i+j-2]==a)
+                {a=qrand()%6;}
+                data[9*i+j]=a;
+                rem[i][j]=false;
+                if(data[9*i+j]==0)box[9*i+j]=new A(this,i,j,data[9*i+j]);
+                if(data[9*i+j]==1)box[9*i+j]=new A(this,i,j,data[9*i+j]);
+                if(data[9*i+j]==2)box[9*i+j]=new A(this,i,j,data[9*i+j]);
+                if(data[9*i+j]==3)box[9*i+j]=new A(this,i,j,data[9*i+j]);
+                if(data[9*i+j]==4)box[9*i+j]=new A(this,i,j,data[9*i+j]);
+                if(data[9*i+j]==5)box[9*i+j]=new A(this,i,j,data[9*i+j]);
+                connect(box[9*i+j],SIGNAL(Click(int,int,int)),this,SLOT(BoxClick(int,int,int)));
+                data2=data;
+
+            }
+        }
+        //QTextStream out(stdout);
+        out << QString("\nboll=\n");
+        SetNum();
+        out << QString::number((*box[0])==(*box[9]));
+        SetPicture();
+
+
 }
