@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Box_a.png</file>
+        <file>box1_1.png</file>
+        <file>box1_2.png</file>
+        <file>box1_3.png</file>
+        <file>box1_4.png</file>
+        <file>box2_1.png</file>
+        <file>box2_2.png</file>
+        <file>box2_3.png</file>
+        <file>box2_4.png</file>
+        <file>box3_1.png</file>
+        <file>box3_2.png</file>
+        <file>box3_3.png</file>
+        <file>box3_4.png</file>
+        <file>box4_1.png</file>
+        <file>box4_2.png</file>
+        <file>box4_3.png</file>
+        <file>box4_4.png</file>
+        <file>box5_1.png</file>
+        <file>box5_2.png</file>
+        <file>box5_3.png</file>
+        <file>box5_4.png</file>
+        <file>box6_1.png</file>
+        <file>box6_2.png</file>
+        <file>box6_3.png</file>
+        <file>box6_4.png</file>
+        <file>clock.png</file>
+        <file>box1_6.png</file>
+        <file>box2_6.png</file>
+        <file>box3_6.png</file>
+        <file>box4_6.png</file>
+        <file>box5_6.png</file>
+        <file>box6_6.png</file>
+    </qresource>
+</RCC>
